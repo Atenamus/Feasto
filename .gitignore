@@ -1,0 +1,5 @@
+node_modules/
+.expo/
+.vscode/
+swiggy_data.json
+.env
