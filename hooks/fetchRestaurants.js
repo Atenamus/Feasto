@@ -4,7 +4,7 @@ import { Databases } from "react-native-appwrite";
 
 const fetchRestaurants = () => {
   const databases = new Databases(client);
-
+  const [loading, setLoading] = useState(true);
   const [restaurantList, setRestaurantList] = useState([]);
 
   useEffect(() => {
@@ -14,20 +14,20 @@ const fetchRestaurants = () => {
         process.env.EXPO_PUBLIC_COLLECTION_ID
       );
 
-      result.then(
-        function (response) {
+      result
+        .then((response) => {
           setRestaurantList(response.documents);
-        },
-        function (error) {
-          console.log(error);
-        }
-      );
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setLoading(false);
+        });
     };
 
     requestRestaurant();
   }, []);
 
-  return restaurantList;
+  return [loading, restaurantList];
 };
 
 export default fetchRestaurants;
