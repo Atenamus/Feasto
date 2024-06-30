@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext, useEffect } from "react";
 import {
   SafeAreaView,
   View,
@@ -11,9 +11,25 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Dot } from "lucide-react-native";
 import img from "../assets/noddle.jpg";
 import CustomBtn from "../components/Button";
-import { router } from "expo-router";
+import { router, Redirect } from "expo-router";
+import { UserContext } from "../context/userContext";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 const App = () => {
+  const { isLoggedIn, loading } = useContext(UserContext);
+  useEffect(() => {
+    console.log(isLoggedIn);
+    const redirectHandler = async () => {
+      await SplashScreen.hideAsync();
+      if (isLoggedIn ) {
+        router.replace("/Home");
+      }
+    };
+    redirectHandler();
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
@@ -35,11 +51,12 @@ const App = () => {
             <Text style={styles.subtitle}>Order from top restaurants</Text>
           </View>
           <CustomBtn
-            title="Get Started"
             onPress={() => {
               router.push("/sign-up");
             }}
-          />
+          >
+            Get Started
+          </CustomBtn>
         </View>
       </View>
       <StatusBar barStyle="light-content" />

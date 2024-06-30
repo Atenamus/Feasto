@@ -3,14 +3,15 @@ import { TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
 
 const screenWidth = Dimensions.get("window").width;
 
-const CustomBtn = ({ title, onPress }) => {
+const CustomBtn = ({ onPress, disabled, children }) => {
   return (
     <TouchableOpacity
       style={styles.button}
       onPress={onPress}
       activeOpacity={0.7}
+      disabled={disabled}
     >
-      <Text style={styles.buttonText}>{title}</Text>
+      <Text style={styles.buttonText}>{children}</Text>
     </TouchableOpacity>
   );
 };

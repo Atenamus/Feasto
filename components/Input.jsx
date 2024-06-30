@@ -1,14 +1,14 @@
 import React from "react";
 import { View, TextInput, Text, StyleSheet } from "react-native";
 
-const CustomInput = ({ label, error, secureTextEntry, ...rest }) => {
+const CustomInput = ({ label, error, secureTextEntry, ...props }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         style={[styles.input, error && styles.inputError]}
         secureTextEntry={secureTextEntry}
-        {...rest}
+        {...props}
       />
       {error && <Text style={styles.errorText}>{error.message}</Text>}
     </View>

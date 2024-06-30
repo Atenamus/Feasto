@@ -2,7 +2,6 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import biryani from "../assets/biryani.jpg";
 
 const SpotLightCard = ({ imgUrl, hotelName, deliveryTime }) => {
   return (

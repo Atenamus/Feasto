@@ -1,30 +1,42 @@
-import  { useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { useState, useContext, useEffect } from "react";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useForm, Controller } from "react-hook-form";
 import CustomInput from "../../components/Input";
 import CustomBtn from "../../components/Button";
-import { Link } from "expo-router";
-import client from "../../services/appwrite";
-import { Account } from "react-native-appwrite";
+import { Link, router } from "expo-router";
+import authService from "../../services/auth";
+import { UserContext } from "../../context/userContext";
 
 const Signup = () => {
   const [loading, setloading] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleSignUp = (data) => {
-    const account = new Account(client);
-    const promise = account.create(
-      "unique()",
-      data.email,
-      data.password,
-      data.name
-    );
-    promise.then(() => console.log("accout created"));
+  useEffect(() => {
+    if (isLoggedIn) router.replace("/Home");
+  }, []);
+
+  const handleSignUp = async (data) => {
+    setloading(true);
+    try {
+      const res = await authService.signUp(
+        data.email,
+        data.password,
+        data.name
+      );
+      console.log("🚀 ~ handleSignUp ~ res:", res);
+      router.replace("/Home");
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setloading(false);
+      setIsLoggedIn(true);
+    }
   };
 
   return (
@@ -88,7 +100,9 @@ const Signup = () => {
           )}
           name="password"
         />
-        <CustomBtn title="Sign Up" onPress={handleSubmit(handleSignUp)} />
+        <CustomBtn onPress={handleSubmit(handleSignUp)} disabled={loading}>
+          {loading ? <ActivityIndicator color={"#ffffff"} /> : "Create"}
+        </CustomBtn>
         <Text style={styles.signInText}>
           Already have an Account?{" "}
           <Link href="/sign-in" style={{ color: "#ff0000" }}>
@@ -103,9 +117,9 @@ const Signup = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
+    marginTop: 80,
   },
   title: {
     fontSize: 40,

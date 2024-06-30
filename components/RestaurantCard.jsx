@@ -1,13 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Image } from "expo-image";
-import biryani from "../assets/biryani.jpg";
 import { LinearGradient } from "expo-linear-gradient";
 import { Heart, Star, Bike } from "lucide-react-native";
+import { router } from "expo-router";
 
-const RestaurantCard = ({ name, rating, types, location,imgUrl }) => {
+const RestaurantCard = ({ name, rating, types, location, imgUrl }) => {
   return (
-    <View style={styles.cardContainer}>
+    <Pressable style={styles.cardContainer} onPress={()=>router.push("/Restaurant")}>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={imgUrl} contentFit="cover" />
         <LinearGradient
@@ -42,7 +42,7 @@ const RestaurantCard = ({ name, rating, types, location,imgUrl }) => {
           <Text style={styles.deliveryText}>FREE DELIVERY</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
