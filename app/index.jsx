@@ -18,7 +18,7 @@ import * as SplashScreen from "expo-splash-screen";
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
-  const { isLoggedIn, loading } = useContext(UserContext);
+  const { isLoggedIn } = useContext(UserContext);
   useEffect(() => {
     console.log(isLoggedIn);
     const redirectHandler = async () => {

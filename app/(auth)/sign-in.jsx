@@ -2,11 +2,11 @@ import { useState, useContext, useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useForm, Controller } from "react-hook-form";
-import CustomInput from "../../components/Input";
-import CustomBtn from "../../components/Button";
+import CustomInput from "@component/Input";
+import CustomBtn from "@component/Button";
 import { Link, router } from "expo-router";
-import authService from "../../services/auth";
-import { UserContext } from "../../context/userContext";
+import authService from "@services/auth";
+import { UserContext } from "@context/userContext";
 const SignIn = () => {
   const [loading, setloading] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);

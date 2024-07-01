@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { UserContext } from "./userContext";
 import authService from "../services/auth";
 
-export default UserProvider = ({ children }) => {
+export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [sessionId, setsessionId] = useState("");
   const [loading, setloading] = useState(true);

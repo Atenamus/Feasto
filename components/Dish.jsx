@@ -3,23 +3,30 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import img from "../assets/noddle.jpg";
-const Dish = ({ name, price, rating, image }) => {
+import { useCart } from "@context/cartContextProvider";
+
+const Dish = ({ name, price, rating, image = { img }, id }) => {
+  const { dispatch } = useCart();
+  const addToCartHandler = () => {
+    const dish = { name, price, rating, img, id };
+    dispatch({ type: "ADD_TO_CART", payload: dish });
+  };
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.card}>
         <View style={styles.details}>
           <Text style={styles.name}>{name}</Text>
-          <Text style={styles.price}>${price}</Text>
+          <Text style={styles.price}>Rs{price}</Text>
           <Text style={styles.rating}>Rating: {rating}</Text>
         </View>
         <View style={styles.imageContainer}>
           <Image source={img} style={styles.image} />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={addToCartHandler}>
             <Text style={styles.buttonText}>Add to Cart</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

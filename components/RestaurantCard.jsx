@@ -6,8 +6,17 @@ import { Heart, Star, Bike } from "lucide-react-native";
 import { router } from "expo-router";
 
 const RestaurantCard = ({ name, rating, types, location, imgUrl }) => {
+  const restaurantInfo = { name, rating, types, location };
   return (
-    <Pressable style={styles.cardContainer} onPress={()=>router.push("/Restaurant")}>
+    <Pressable
+      style={styles.cardContainer}
+      onPress={() =>
+        router.push({
+          pathname: "/[Restaurant]",
+          params: { restaurantInfo: JSON.stringify(restaurantInfo) },
+        })
+      }
+    >
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={imgUrl} contentFit="cover" />
         <LinearGradient
