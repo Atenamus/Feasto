@@ -109,7 +109,12 @@ const Restaurant = () => {
             data={dishes}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <Dish name={item.name} rating={item.rating} price={item.Price} />
+              <Dish
+                name={item.name}
+                rating={item.rating}
+                price={item.Price}
+                id={item.id}
+              />
             )}
             showsVerticalScrollIndicator={false}
           />
@@ -127,7 +132,7 @@ const styles = StyleSheet.create({
   },
   restaurantContainer: {
     width: "100%",
-    height: "24%",
+    height: "21.5%",
     backgroundColor: "#f2f2f2",
     paddingHorizontal: 16,
     display: "flex",

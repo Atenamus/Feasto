@@ -37,9 +37,25 @@ class AuthService {
     }
   }
 
-  async logoutUser(sessionId) {
+  async logoutUser() {
     try {
       await this.account.deleteSessions();
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  async updateName(name) {
+    try {
+      await this.account.updateName(name);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+  async updateEmail(name) {
+    console.log(name);
+    try {
+      await this.account.updateName(name);
     } catch (error) {
       throw new Error(error.message);
     }

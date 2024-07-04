@@ -6,10 +6,11 @@ import CustomInput from "@component/Input";
 import CustomBtn from "@component/Button";
 import { Link, router } from "expo-router";
 import authService from "@services/auth";
-import { UserContext } from "@context/userContext";
+import { useUser } from "@context/userContextProvider";
+
 const SignIn = () => {
   const [loading, setloading] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, setIsLoggedIn } = useUser();
   const {
     control,
     handleSubmit,

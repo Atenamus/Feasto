@@ -1,9 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import img from "../assets/noddle.jpg";
 import { useCart } from "@context/cartContextProvider";
+import { Star } from "lucide-react-native";
 
 const Dish = ({ name, price, rating, image = { img }, id }) => {
   const { dispatch } = useCart();
@@ -16,13 +15,16 @@ const Dish = ({ name, price, rating, image = { img }, id }) => {
       <View style={styles.card}>
         <View style={styles.details}>
           <Text style={styles.name}>{name}</Text>
-          <Text style={styles.price}>Rs{price}</Text>
-          <Text style={styles.rating}>Rating: {rating}</Text>
+          <Text style={styles.price}>Rs {price}</Text>
+          <View style={styles.ratingContainer}>
+            <Star fill="green" />
+            <Text style={styles.ratingText}>{rating}</Text>
+          </View>
         </View>
         <View style={styles.imageContainer}>
           <Image source={img} style={styles.image} />
           <TouchableOpacity style={styles.button} onPress={addToCartHandler}>
-            <Text style={styles.buttonText}>Add to Cart</Text>
+            <Text style={styles.buttonText}>Add </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -39,53 +41,59 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#fff",
     borderRadius: 8,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 5 },
-    elevation: 3,
     padding: 16,
     marginVertical: 5,
-    alignItems: "center",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#8D8C91",
+    height: 165,
   },
   details: {
     flex: 1,
     marginRight: 16,
   },
   name: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "bold",
     marginBottom: 4,
   },
   price: {
     fontSize: 16,
-    color: "#888",
     marginBottom: 4,
+    fontWeight: "700",
   },
-  rating: {
-    fontSize: 14,
-    color: "#666",
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  ratingText: {
+    marginTop: 2,
+    fontSize: 16.5,
+    textAlignVertical: "center",
   },
   imageContainer: {
     position: "relative",
   },
   image: {
-    width: 80,
-    height: 80,
+    width: 140,
+    height: 130,
     borderRadius: 8,
   },
   button: {
     position: "absolute",
-    bottom: 5,
-    right: 5,
-    backgroundColor: "#ff6347",
+    bottom: -4,
+    right: 26,
+    backgroundColor: "#fff",
+    elevation: 10,
     paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 4,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    width: 90,
   },
   buttonText: {
-    color: "#fff",
-    fontSize: 14,
+    color: "green",
+    fontSize: 20,
+    fontWeight: "700",
+    textAlign: "center",
   },
 });
 

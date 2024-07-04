@@ -11,7 +11,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Dot } from "lucide-react-native";
 import img from "../assets/noddle.jpg";
 import CustomBtn from "../components/Button";
-import { router, Redirect } from "expo-router";
+import { router } from "expo-router";
 import { UserContext } from "../context/userContext";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -23,7 +23,7 @@ const App = () => {
     console.log(isLoggedIn);
     const redirectHandler = async () => {
       await SplashScreen.hideAsync();
-      if (isLoggedIn ) {
+      if (isLoggedIn) {
         router.replace("/Home");
       }
     };

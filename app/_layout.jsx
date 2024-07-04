@@ -10,6 +10,7 @@ const RootLayout = () => {
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="[Restaurant]" options={{ headerShown: false }} />
+          <Stack.Screen name="Edit" options={{ headerTitle: "Edit Account" }} />
         </Stack>
       </CartProvider>
     </UserProvider>

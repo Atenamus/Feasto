@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./userContext";
 import authService from "../services/auth";
 
 export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [sessionId, setsessionId] = useState("");
   const [loading, setloading] = useState(true);
+  const [userData, setuserData] = useState({});
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userData = await authService.getUser();
-        console.log("User Context");
-        if (userData.$id) {
-          console.log("user there");
+        const res = await authService.getUser();
+        setuserData(res);
+        console.log(userData);
+        if (res.$id) {
+          console.log("User Context : User Session There");
           setIsLoggedIn(true);
-          setsessionId(userData.$id);
         } else {
-          console.log("no user there");
+          console.log("User Context : User Session Not There");
           setIsLoggedIn(false);
           setloading(false);
         }
@@ -29,9 +29,11 @@ export const UserProvider = ({ children }) => {
   }, []);
   return (
     <UserContext.Provider
-      value={{ isLoggedIn, setIsLoggedIn, sessionId, loading }}
+      value={{ isLoggedIn, setIsLoggedIn, loading, userData }}
     >
       {children}
     </UserContext.Provider>
   );
 };
+
+export const useUser = () => useContext(UserContext);

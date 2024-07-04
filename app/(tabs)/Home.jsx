@@ -2,10 +2,10 @@ import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Search } from "lucide-react-native";
-import SpotLightCard from "../../components/SpotLightCard";
-import RestaurantCard from "../../components/RestaurantCard";
-import fetchRestaurants from "../../hooks/fetchRestaurants";
-import Loader from "../../components/Loader";
+import SpotLightCard from "@components/SpotLightCard";
+import RestaurantCard from "@components/RestaurantCard";
+import fetchRestaurants from "@hooks/fetchRestaurants";
+import Loader from "@components/Loader";
 const dummy = [
   {
     Id: 1,
