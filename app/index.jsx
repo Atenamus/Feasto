@@ -52,7 +52,7 @@ const App = () => {
           </View>
           <CustomBtn
             onPress={() => {
-              router.push("/sign-up");
+              router.push("/sign-in");
             }}
           >
             Get Started

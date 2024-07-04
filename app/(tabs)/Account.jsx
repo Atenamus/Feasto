@@ -6,10 +6,20 @@ import authService from "@services/auth";
 import { UserContext } from "@context/userContext";
 import { router, Link } from "expo-router";
 import { ChevronRight } from "lucide-react-native";
-import DropDown from "@components/DropDown";
+import AccountTab from "@components/AccountTab";
 const Account = () => {
   const { isLoggedIn, setIsLoggedIn, userData } = useContext(UserContext);
-
+  console.log("🚀 ~ Account ~ userData:", userData);
+  const handleLogout = async () => {
+    try {
+      await authService.logoutUser();
+      router.replace("/sing-in");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoggedIn(false);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       {isLoggedIn && (
@@ -24,7 +34,26 @@ const Account = () => {
               <ChevronRight style={styles.chevronRight} />
             </View>
           </View>
-          <DropDown />
+          <AccountTab
+            title={"WishList"}
+            descrip={"See Your Favorite Restaurants"}
+            handler={() => router.navigate("/WishList")}
+          />
+          <AccountTab
+            title={"Addresses"}
+            descrip={"Share,Edit & Add New Addresses"}
+          />
+          <AccountTab
+            title={"Payment Options"}
+            descrip={"See Your Payment Option"}
+          />
+          <View
+            style={{
+              marginTop: 20,
+            }}
+          >
+            <CustomBtn onPress={handleLogout}>Logout</CustomBtn>
+          </View>
         </View>
       )}
     </SafeAreaView>

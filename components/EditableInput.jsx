@@ -59,7 +59,7 @@ const EditableText = ({ label, initialValue, updateHandler }) => {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 3,
     borderBottomColor: "gray",
     paddingBottom: 10,
     marginVertical: 20,

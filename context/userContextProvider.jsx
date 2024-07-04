@@ -6,6 +6,7 @@ export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setloading] = useState(true);
   const [userData, setuserData] = useState({});
+  const [wishlist, setWishList] = useState([]);
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -29,7 +30,14 @@ export const UserProvider = ({ children }) => {
   }, []);
   return (
     <UserContext.Provider
-      value={{ isLoggedIn, setIsLoggedIn, loading, userData }}
+      value={{
+        isLoggedIn,
+        setIsLoggedIn,
+        loading,
+        userData,
+        wishlist,
+        setWishList,
+      }}
     >
       {children}
     </UserContext.Provider>

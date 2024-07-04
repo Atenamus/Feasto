@@ -1,12 +1,31 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { Heart, Star, Bike } from "lucide-react-native";
 import { router } from "expo-router";
+import { useUser } from "../context/userContextProvider";
 
 const RestaurantCard = ({ name, rating, types, location, imgUrl }) => {
   const restaurantInfo = { name, rating, types, location };
+  const { wishlist, setWishList } = useUser();
+  const [isInWishlist, setIsInWishlist] = useState(false);
+
+  useEffect(() => {
+    const inWishlist = wishlist.some(
+      (item) => item.name === name && item.location === location
+    );
+    setIsInWishlist(inWishlist);
+  }, [wishlist, name, location]);
+
+  const toggleWishlist = () => {
+    if (isInWishlist) {
+      setWishList(wishlist.filter((item) => item.name !== name));
+    } else {
+      setWishList([...wishlist, restaurantInfo]);
+    }
+    setIsInWishlist(!isInWishlist);
+  };
   return (
     <Pressable
       style={styles.cardContainer}
@@ -23,7 +42,12 @@ const RestaurantCard = ({ name, rating, types, location, imgUrl }) => {
           colors={["transparent", "rgba(0, 0, 0, 0.8)"]}
           style={styles.gradient}
         />
-        <Heart style={styles.heartIcon} color="#fff" />
+        <Pressable onPress={toggleWishlist}>
+          <Heart
+            style={styles.heartIcon}
+            color={isInWishlist ? "red" : "#fff"}
+          />
+        </Pressable>
       </View>
       <View style={styles.infoContainer}>
         <Text style={styles.restaurantName} numberOfLines={1}>

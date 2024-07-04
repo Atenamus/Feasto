@@ -11,6 +11,7 @@ const RootLayout = () => {
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="[Restaurant]" options={{ headerShown: false }} />
           <Stack.Screen name="Edit" options={{ headerTitle: "Edit Account" }} />
+          <Stack.Screen name="WishList" options={{ headerTitle: "WishList" }} />
         </Stack>
       </CartProvider>
     </UserProvider>
